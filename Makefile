@@ -1,6 +1,6 @@
 # define
-# CXX = g++
-CXX = g++-14
+CXX = g++
+# CXX = g++-14
 USE_OPENMP = 1
 
 CXXFLAGS = -Wall -std=c++14

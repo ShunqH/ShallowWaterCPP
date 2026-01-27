@@ -1,6 +1,8 @@
 #include <iostream>  
 #include <iomanip>
 #include <cmath> 
+#include <chrono>
+#include <ctime>
 
 #include "config.h"
 #include "sim.h"
@@ -9,6 +11,9 @@
 using namespace std;
 
 int main(int argc, char* argv[]){
+    auto time0 = chrono::high_resolution_clock::now();
+    clock_t cputime0 = clock();
+
     if (argc < 3 || std::string(argv[1]) != "-i") {
         cerr << "Usage: " << argv[0] << " -i input.in" << endl;
         return 1;
@@ -21,11 +26,8 @@ int main(int argc, char* argv[]){
     int progressInfo = Config::getInstance().get("progressInfo"); 
 
     ShallowWater sim; 
-    // cout<<"check1"<<endl; 
     Setup(sim); 
-    // cout<<"check2"<<endl; 
     double drmin = min(sim.dx, sim.dy); 
-    // cout<<"check3"<<endl; 
 
     double tNextOutput = 0; 
     int outputID = 0; 
@@ -37,6 +39,12 @@ int main(int argc, char* argv[]){
 
     double dt = 0; 
     int step = 0; 
+    auto time1 = chrono::high_resolution_clock::now();
+    auto time2 = chrono::high_resolution_clock::now();
+    clock_t cputime1 = clock();
+    clock_t cputime2 = clock();
+    double walltime  = 0; 
+    double cputime = 0; 
     while(sim.t<=tmax){
         step ++; 
         dt = CFL*drmin/sim.cmax; 
@@ -72,13 +80,30 @@ int main(int argc, char* argv[]){
             sim.WriteFrame(outputID); 
             tNextOutput += dtoutput; 
             outputID++; 
+            time2 = chrono::high_resolution_clock::now();
+            cputime2 = clock(); 
+            walltime = chrono::duration<double>(time2 - time1).count();
+            cputime = double(cputime2 - cputime1) / CLOCKS_PER_SEC;
+            time1 = time2; 
+            cputime1 = cputime2; 
             cout << right
                  << "Output frame: " << setw(8) << outputID
-                 << " , t = "     << setw(8) << fixed << setprecision(3) << sim.t
+                 << "\n        t = "     << setw(8) << fixed << setprecision(3) << sim.t
                  << " , total steps = " << setw(6) << step
+                 << "\n        step walltime = " << setw(8) << fixed << setprecision(3) << walltime
+                 << " s,  cputime = "     << setw(8) << fixed << setprecision(3) << cputime << " s"
                  << "\n-----------------------------------------------------------"
                  << endl;
             doOutput = 0; 
         }
     }
+    walltime = chrono::duration<double>(time2 - time0).count(); 
+    cputime = double(cputime2 - cputime0) / CLOCKS_PER_SEC; 
+    cout << right
+            << "Finish! " 
+            << "\n    total steps = " << setw(6) << step
+            << " , \n    walltime = " << setw(8) << fixed << setprecision(3) << walltime
+            << " s, \n    cputime = " << setw(8) << fixed << setprecision(3) << cputime << " s"
+            << "\n-----------------------------------------------------------"
+            << endl;
 }

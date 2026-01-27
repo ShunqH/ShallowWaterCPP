@@ -9,7 +9,7 @@ bmax            = 2.0
 
 # simulation 
 g               = 1.0           # gravity constant  
-tmax            = 100.0          # end time
+tmax            = 50.0          # end time
 dtoutput        = 0.1          # dt every output
 
 CFL             = 0.5           # CFL number ( CFL < 1 ), dt depends on CFL
