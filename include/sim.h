@@ -10,6 +10,7 @@ struct WaveSpectrum {
 
 class ShallowWater{
 public: 
+    const double hmin = 1e-8; 
     double t, g, H, bmax, bmin; 
     int NX, NY, NGhost; 
     double xmin, xmax, ymin, ymax, dx, dy; 
@@ -17,7 +18,7 @@ public:
     double LSponge, sigmaMax; 
     double lenx, leny, lenArr; 
     double cmax; 
-    
+
     struct flux3{double f1, f2, f3; }; 
 
     std::vector<double> x, y; 

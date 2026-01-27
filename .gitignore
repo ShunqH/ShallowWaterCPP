@@ -16,6 +16,8 @@ __pycache__/
 *.h5
 *.dat
 *.bin
+output_*
+./bin/*
 
 # Images
 *.png

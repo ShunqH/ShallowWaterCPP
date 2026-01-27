@@ -1,7 +1,6 @@
 #include <cmath>
 // #include <vector>
 #include <iostream>  
-#include <algorithm>
 #include "sim.h"
 
 using namespace std; 
@@ -40,19 +39,16 @@ void ShallowWater::UpdateU(double dt){
                 velx[idnow] = 0.; 
                 vely[idnow] = 0.; 
             }
-            double cs = sqrt( g*h[idnow] ) ; 
-            velx[idnow] = max(-cs, min(velx[idnow], cs));   // clamp
-            vely[idnow] = max(-cs, min(vely[idnow], cs));   
-            double vmag = cs + sqrt(velx[idnow]*velx[idnow] + vely[idnow]*vely[idnow]);
+            double vmag = sqrt( g*h[idnow] ) 
+                        + sqrt(velx[idnow]*velx[idnow] + vely[idnow]*vely[idnow]);
             if (vmag > cmax){
-                // cout<<"here b is "<<b[idnow]
-                //     <<", h is "<<h[idnow]
-                //     <<", vx is "<<velx[idnow]
-                //     <<", and vmag is "<<vmag
-                //     <<endl; 
-                // cout<<"position is ("<<x[i]
-                //     <<", "<<y[j]<<")"
-                //     <<endl; 
+                cout<<"here b is "<<b[idnow]
+                    <<", h is "<<h[idnow]
+                    <<", and vmag is "<<vmag
+                    <<endl; 
+                cout<<"position is ("<<x[i]
+                    <<", "<<y[j]<<")"
+                    <<endl; 
                 cmax = vmag;
             }
         }

@@ -40,6 +40,17 @@ int main(int argc, char* argv[]){
     while(sim.t<=tmax){
         step ++; 
         dt = CFL*drmin/sim.cmax; 
+        if (dt<1e-8){ 
+            cout << right
+                 << "error: dt is too small" 
+                 << " , dt = "     << setw(10) << fixed << setprecision(6) << dt
+                 <<" , and vmag is "<<sim.cmax 
+                 << " program quit. "
+                 << "\n-----------------------------------------------------------"
+                 << endl;
+            doOutput = 0; 
+            break; 
+        }
         if (sim.t+dt >= tNextOutput) {
             dt = tNextOutput - sim.t; 
             doOutput = 1; 
@@ -69,6 +80,5 @@ int main(int argc, char* argv[]){
                  << endl;
             doOutput = 0; 
         }
-        
     }
 }

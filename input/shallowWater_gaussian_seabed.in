@@ -5,10 +5,10 @@ H               = 1.0
 
 # sea bed 
 bmin            = 0.0 
-bmax            = 0.8
+bmax            = 2.0
 x0              = 1.0 
 y0              = 0.0 
-b_sigma         = 2 
+b_sigma         = 2.0
 
 # simulation 
 g               = 1.0           # gravity constant  
@@ -30,6 +30,6 @@ xmax            = 12
 ymin            = -5
 ymax            = 5
 
-sponge          = 1 
+sponge          = 0 
 L_sponge        = 3  
 sigma_max       = 20 

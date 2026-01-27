@@ -2,12 +2,14 @@
 
 # Shallow Water
 H               = 1.0 
+
+# sea bed 
 bmin            = 0.0 
-bmax            = 0.99 
+bmax            = 2.0
 
 # simulation 
 g               = 1.0           # gravity constant  
-tmax            = 50.0          # end time
+tmax            = 100.0          # end time
 dtoutput        = 0.1          # dt every output
 
 CFL             = 0.5           # CFL number ( CFL < 1 ), dt depends on CFL
@@ -15,16 +17,16 @@ progressInfo    = 0             # do you want to check the info every step (1: t
 
 # mesh 
 boundaryType    = 0             # 1 for outflow, 2 for Periodic, 3 for Reflection, 0 for self define
-NX              = 512           # resolution on x   
-NY              = 256           # resolution on x   
+NX              = 1024           # resolution on x   
+NY              = 128           # resolution on x   
 NGhost          = 1             # number of ghost cell ( usually is 1 )
 
 # domain size 
-xmin            = -13
-xmax            = 5
+xmin            = 0
+xmax            = 10
 ymin            = -5
 ymax            = 5
 
-sponge          = 1 
-L_sponge        = 2  
-sigma_max       = 40 
+sponge          = 0 
+L_sponge        = 3  
+sigma_max       = 20 

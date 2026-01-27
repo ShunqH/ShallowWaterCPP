@@ -23,7 +23,7 @@ After compilation, run the solver from the `bin/` directory:
 
 ```bash
 cd bin
-./water.sim -i ../input/shallowWater_gaussian_seabed.in
+./water.sim -i ../input/shallowWater.in
 ```
 
 The input file specifies the physical setup, numerical parameters, and initial conditions.
@@ -68,12 +68,9 @@ ShallowWater/
 
 This project is an ongoing project.
 
-- The current version supports **non-flat seabed (bathymetry) construction**, including spatially varying seabed profiles.
-- **Dry–wet treatment is not yet implemented**.
-  As a result, the seabed elevation must remain **below the water surface everywhere** during the simulation.
-
 ---
 
 ## Notes
 
+- A rough dry–wet treatment is implemented. (2026.01.26)
 - The `pypkg/` directory contains Python scripts and example visualization outputs used for post-processing.
