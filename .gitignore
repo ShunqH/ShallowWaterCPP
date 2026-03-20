@@ -1,8 +1,9 @@
-# 编译产物
+# compile
 *.o
 *.out
 *.exe
 *.mod
+*.sim
 
 # CMake / Make
 obj/

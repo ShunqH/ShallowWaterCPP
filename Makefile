@@ -1,5 +1,5 @@
 # define
-CXX = g++
+CXX = g++ -O3 -march=native -ffast-math -funroll-loops -ftree-vectorize
 # CXX = g++-14
 USE_OPENMP = 1
 
